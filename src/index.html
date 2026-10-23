@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f7fb">
+  <title>Overview · ScholarDesk</title>
+  <script>
+    try {
+      if (localStorage.getItem("sms-theme") === "dark") {
+        document.documentElement.dataset.theme = "dark";
+      }
+    } catch {
+      document.documentElement.dataset.theme = "light";
+    }
+  </script>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+      <a class="brand" href="#overview" data-view="overview" aria-label="ScholarDesk overview">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32"><path d="M5 11.5 16 6l11 5.5L16 17 5 11.5Z"/><path d="M9 14v6.2c4.6 3.5 9.4 3.5 14 0V14M27 12v8"/></svg>
+        </span>
+        <span class="brand-copy"><strong>ScholarDesk</strong><small>STUDENT PORTAL</small></span>
+      </a>
+
+      <div class="sidebar-label">WORKSPACE</div>
+      <nav class="primary-nav" aria-label="Workspace">
+        <button class="nav-link is-active" type="button" data-view="overview" aria-current="page">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg>
+          <span>Overview</span>
+        </button>
+        <button class="nav-link" type="button" data-view="students">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 20v-1.5a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4V20"/><circle cx="9.5" cy="7" r="4"/><path d="M17 11a4 4 0 0 0 0-8M21 20v-1.5a4 4 0 0 0-3-3.87"/></svg>
+          <span>Students</span><span class="nav-count" id="sidebar-student-count">0</span>
+        </button>
+        <button class="nav-link" type="button" data-view="courses">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Z"/><path d="M4 17a2.5 2.5 0 0 1 2.5-2.5H20M8 7h7"/></svg>
+          <span>Courses</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-label sidebar-label-spaced">PREFERENCES</div>
+      <nav class="primary-nav" aria-label="Preferences">
+        <button class="nav-link" type="button" data-view="settings">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="m19.4 15 .1.1a1.7 1.7 0 1 1-2.4 2.4L17 17.4a1.7 1.7 0 0 0-2.9 1.2v.2a1.7 1.7 0 1 1-3.4 0v-.2a1.7 1.7 0 0 0-2.9-1.2l-.1.1a1.7 1.7 0 1 1-2.4-2.4l.1-.1a1.7 1.7 0 0 0-1.2-2.9H4a1.7 1.7 0 1 1 0-3.4h.2a1.7 1.7 0 0 0 1.2-2.9l-.1-.1a1.7 1.7 0 1 1 2.4-2.4l.1.1a1.7 1.7 0 0 0 2.9-1.2V2a1.7 1.7 0 1 1 3.4 0v.2a1.7 1.7 0 0 0 2.9 1.2l.1-.1a1.7 1.7 0 1 1 2.4 2.4l-.1.1a1.7 1.7 0 0 0 1.2 2.9h.2a1.7 1.7 0 1 1 0 3.4h-.2a1.7 1.7 0 0 0-1.3 2.9Z"/></svg>
+          <span>Settings</span>
+        </button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="storage-note">
+          <span class="storage-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 8h8M8 12h8M8 16h4"/></svg>
+          </span>
+          <span><strong>Private workspace</strong><small>Saved on this device</small></span>
+        </div>
+        <div class="sidebar-profile">
+          <span class="avatar">AD</span>
+          <span class="profile-copy"><strong>Administrator</strong><small>Workspace owner</small></span>
+          <span class="online-dot" aria-label="Online"></span>
+        </div>
+      </div>
+    </aside>
+
+    <div class="main-column">
+      <header class="topbar">
+        <div class="topbar-leading">
+          <button class="icon-button sidebar-toggle" id="sidebar-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="sidebar">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+          <div class="breadcrumbs"><span>Workspace</span><span class="crumb-separator">/</span><strong id="breadcrumb-current">Overview</strong></div>
+        </div>
+        <div class="topbar-actions">
+          <label class="global-search" id="global-search-wrapper">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg>
+            <input id="global-search" type="search" placeholder="Search students..." aria-label="Search students">
+            <kbd>/</kbd>
+          </label>
+          <span class="topbar-divider" aria-hidden="true"></span>
+          <button class="icon-button theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark theme" title="Switch theme">
+            <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></svg>
+            <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 15.5A8.5 8.5 0 0 1 8.5 3.2 8.7 8.7 0 1 0 20.8 15.5Z"/></svg>
+          </button>
+          <span class="avatar topbar-avatar" aria-label="Administrator profile">AD</span>
+        </div>
+      </header>
+
+      <main id="main-content" class="page-content">
+        <section class="view-panel is-visible" id="view-overview" aria-labelledby="page-title">
+          <div class="page-heading enter">
+            <div>
+              <div class="eyebrow"><span class="eyebrow-dot"></span> YOUR ACADEMIC WORKSPACE</div>
+              <h1 id="page-title">Good to see you, Admin</h1>
+              <p class="page-subtitle">Here’s what’s happening with your students today.</p>
+            </div>
+            <button class="button button-primary" type="button" data-action="add">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+              Add student
+            </button>
+          </div>
+
+          <div class="stats-grid enter delay-1">
+            <article class="stat-card stat-indigo">
+              <div class="stat-top"><span class="stat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 20v-1.5a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4V20"/><circle cx="9.5" cy="7" r="4"/><path d="M17 11a4 4 0 0 0 0-8M21 20v-1.5a4 4 0 0 0-3-3.87"/></svg></span><span class="stat-caption">ENROLMENT</span></div>
+              <div class="stat-value" id="stat-total">0</div>
+              <div class="stat-label">Total students</div>
+              <span class="stat-decoration" aria-hidden="true"></span>
+            </article>
+            <article class="stat-card stat-blue">
+              <div class="stat-top"><span class="stat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21V5.5Z"/><path d="M4 17a2.5 2.5 0 0 1 2.5-2.5H20M8 7h7"/></svg></span><span class="stat-caption">PROGRAMS</span></div>
+              <div class="stat-value" id="stat-courses">0</div>
+              <div class="stat-label">Active courses</div>
+              <span class="stat-decoration" aria-hidden="true"></span>
+            </article>
+            <article class="stat-card stat-violet">
+              <div class="stat-top"><span class="stat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span><span class="stat-caption">LAST 7 DAYS</span></div>
+              <div class="stat-value" id="stat-recent">0</div>
+              <div class="stat-label">Recently added</div>
+              <span class="stat-decoration" aria-hidden="true"></span>
+            </article>
+            <article class="stat-card stat-teal">
+              <div class="stat-top"><span class="stat-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5M3 16l9 5 9-5"/></svg></span><span class="stat-caption">AVERAGE</span></div>
+              <div class="stat-value" id="stat-unique">0</div>
+              <div class="stat-label">Average class size</div>
+              <span class="stat-decoration" aria-hidden="true"></span>
+            </article>
+          </div>
+
+          <div class="dashboard-grid enter delay-2">
+            <section class="panel recent-panel" aria-labelledby="recent-title">
+              <div class="panel-heading">
+                <div><h2 id="recent-title">Recent students</h2><p>Your latest student records</p></div>
+                <button class="text-button" type="button" data-view="students">View all <span aria-hidden="true">→</span></button>
+              </div>
+              <div id="recent-list" class="recent-list"></div>
+              <div class="empty-card-state" id="overview-empty">
+                <span class="empty-illustration" aria-hidden="true">
+                  <svg viewBox="0 0 64 64"><rect x="10" y="12" width="44" height="40" rx="8"/><circle cx="25" cy="29" r="7"/><path d="M15 46c1.8-6 5.5-9 10-9 2.4 0 4.7.8 6.5 2.5M40 25h8m-8 8h8m-8 8h5"/></svg>
+                </span>
+                <strong>Your student space is ready</strong>
+                <p>Add your first student to start building your academic directory.</p>
+                <button class="button button-secondary" type="button" data-action="add">Add your first student</button>
+              </div>
+            </section>
+            <section class="panel course-panel" aria-labelledby="distribution-title">
+              <div class="panel-heading">
+                <div><h2 id="distribution-title">Course distribution</h2><p>Students by course</p></div>
+                <span class="panel-menu-label">OVERVIEW</span>
+              </div>
+              <div id="course-chart" class="course-chart"></div>
+              <div id="course-empty" class="chart-empty">
+                <span class="chart-empty-icon" aria-hidden="true">—</span>
+                <p>Course insights will appear here</p>
+                <small>They’ll update as students are added.</small>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="view-panel" id="view-students" aria-labelledby="students-title" hidden>
+          <div class="page-heading">
+            <div><div class="eyebrow"><span class="eyebrow-dot"></span> DIRECTORY</div><h1 id="students-title">Students</h1><p class="page-subtitle">Manage your student records in one place.</p></div>
+            <button class="button button-primary" type="button" data-action="add"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Add student</button>
+          </div>
+          <section class="panel students-panel" aria-label="Student directory">
+            <div class="directory-toolbar">
+              <div><h2>All students <span class="count-pill" id="directory-count">0</span></h2><p>Search, filter, and sort your directory</p></div>
+              <div class="directory-controls">
+                <label class="control-search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg><input id="student-search" type="search" placeholder="Search name or roll no." aria-label="Search by student name or roll number"></label>
+                <label class="select-wrap"><span class="visually-hidden">Filter by course</span><select id="course-filter"><option value="">All courses</option></select><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg></label>
+                <label class="select-wrap"><span class="visually-hidden">Sort students</span><select id="student-sort"><option value="name-asc">Name A–Z</option><option value="name-desc">Name Z–A</option><option value="roll-asc">Roll number A–Z</option><option value="roll-desc">Roll number Z–A</option><option value="course-asc">Course A–Z</option><option value="course-desc">Course Z–A</option></select><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m7 10 5 5 5-5"/></svg></label>
+                <button class="button button-quiet" id="clear-results" type="button">Clear</button>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table class="student-table">
+                <caption class="visually-hidden">Student directory with names, roll numbers, courses, and actions</caption>
+                <thead><tr><th scope="col">STUDENT</th><th scope="col">ROLL NUMBER</th><th scope="col">COURSE</th><th scope="col" class="actions-heading">ACTIONS</th></tr></thead>
+                <tbody id="student-list"></tbody>
+              </table>
+              <div class="directory-empty" id="directory-empty" hidden>
+                <span class="empty-illustration" aria-hidden="true"><svg viewBox="0 0 64 64"><rect x="10" y="12" width="44" height="40" rx="8"/><circle cx="25" cy="29" r="7"/><path d="M15 46c1.8-6 5.5-9 10-9 2.4 0 4.7.8 6.5 2.5M40 25h8m-8 8h8m-8 8h5"/></svg></span>
+                <strong id="directory-empty-title">No students yet</strong><p id="directory-empty-copy">Add a student to see them in your directory.</p>
+                <button class="button button-secondary" type="button" data-action="add">Add student</button>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <section class="view-panel" id="view-courses" aria-labelledby="courses-title" hidden>
+          <div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-dot"></span> ACADEMIC PROGRAMS</div><h1 id="courses-title">Courses</h1><p class="page-subtitle">Course summaries are derived from your student records.</p></div></div>
+          <div class="course-summary-grid" id="course-summary-grid"></div>
+          <div id="courses-empty" class="panel full-empty" hidden><span class="empty-illustration" aria-hidden="true"><svg viewBox="0 0 64 64"><path d="M13 14a5 5 0 0 1 5-5h34v42H18a5 5 0 0 0-5 5V14Z"/><path d="M13 48a5 5 0 0 1 5-5h34M23 20h18m-18 8h18"/></svg></span><strong>No courses to show yet</strong><p>Courses appear automatically when you add students to your directory.</p><button class="button button-primary" type="button" data-action="add">Add student</button></div>
+        </section>
+
+        <section class="view-panel" id="view-settings" aria-labelledby="settings-title" hidden>
+          <div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-dot"></span> PREFERENCES</div><h1 id="settings-title">Settings</h1><p class="page-subtitle">Manage the appearance and data on this device.</p></div></div>
+          <section class="panel settings-panel"><div class="settings-row"><div class="settings-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2"/></svg></div><div class="settings-copy"><strong>Appearance</strong><p>Choose a comfortable theme for your workspace.</p></div><button class="button button-secondary" id="settings-theme-toggle" type="button">Switch to dark mode</button></div>
+            <div class="settings-row"><div class="settings-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 8h8M8 12h8M8 16h4"/></svg></div><div class="settings-copy"><strong>Student data</strong><p>Your records are stored locally in this browser and are not sent to a server.</p></div><span class="local-badge">LOCAL ONLY</span></div>
+            <div class="settings-row"><div class="settings-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M8 6V4h8v2m-9 0 1 14h8l1-14"/></svg></div><div class="settings-copy"><strong>Clear all student records</strong><p>Remove all student records saved in this browser.</p></div><button class="button button-danger" id="clear-data" type="button">Clear records</button></div>
+          </section>
+        </section>
+
+        <footer class="page-footer"><span>ScholarDesk <span aria-hidden="true">·</span> Student workspace</span><span>Records are saved on this device</span></footer>
+      </main>
+    </div>
+  </div>
+  <div class="sidebar-backdrop" id="sidebar-backdrop" hidden></div>
+
+  <dialog class="student-dialog" id="student-dialog" aria-labelledby="dialog-title">
+    <form class="dialog-form" id="student-form" novalidate>
+      <div class="dialog-heading"><div><span class="dialog-kicker">STUDENT RECORD</span><h2 id="dialog-title">Add a student</h2><p>Enter the details below to add a student to your directory.</p></div><button class="icon-button dialog-close" type="button" id="dialog-close" aria-label="Close form"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
+      <div class="dialog-fields">
+        <div class="form-field"><label for="student-name">Full name <span>*</span></label><input id="student-name" name="name" type="text" autocomplete="name" placeholder="e.g. Jordan Lee" required aria-describedby="name-error"><small class="field-error" id="name-error"></small></div>
+        <div class="form-field"><label for="roll-number">Roll number <span>*</span></label><input id="roll-number" name="roll" type="text" placeholder="e.g. STU-2024-001" required aria-describedby="roll-error"><small class="field-error" id="roll-error"></small></div>
+        <div class="form-field"><label for="course">Course <span>*</span></label><input id="course" name="course" type="text" list="course-options" placeholder="e.g. Computer Science" required aria-describedby="course-error"><datalist id="course-options"></datalist><small class="field-error" id="course-error"></small></div>
+      </div>
+      <p class="dialog-message" id="form-message" role="status" aria-live="polite"></p>
+      <div class="dialog-actions"><button class="button button-secondary" id="cancel-form" type="button">Cancel</button><button class="button button-primary" id="save-student" type="submit"><span>Save student</span></button></div>
+    </form>
+  </dialog>
+  <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+</body>
+</html>

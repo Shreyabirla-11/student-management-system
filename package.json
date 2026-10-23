@@ -1,0 +1,27 @@
+
+{
+  "name": "student-management-system",
+  "version": "1.0.0",
+  "description": "FA 2 Agile Student Management System with CI/CD",
+  "main": "src/app.js",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node scripts/build.js",
+    "test": "node --test",
+    "lint": "eslint src tests scripts eslint.config.js",
+    "start": "node scripts/serve.js"
+  },
+  "keywords": [
+    "agile",
+    "ci-cd",
+    "github-actions",
+    "student-management"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^9.0.0",
+    "globals": "^15.0.0"
+  }
+}
